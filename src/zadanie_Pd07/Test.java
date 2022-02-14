@@ -11,11 +11,12 @@ import java.io.IOException;
 public class Test {
 
      void sprawdźWyniki() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("dane"));
-        String line = reader.readLine();
+         BufferedReader reader = new BufferedReader(new FileReader("dane"));
+         String line = reader.readLine();
 
-        while (line != null) {
-            boolean ok = false;
+         boolean ok = true;
+
+         while (line != null) {
             System.out.println(line);
             String[] split = line.split("=");
 
@@ -25,14 +26,13 @@ public class Test {
 
             if (działanie != wynik) {
                 System.out.println("Błąd w ostatnim działaniu");
-                ok = true;
+                ok = false;
                 break;
             }
             line = reader.readLine();
-            if (!ok)
-                System.out.println("Wyniki poprawne");
         }
-
+         if (ok)
+             System.out.println("Wyniki poprawne");
     }
 
     void sprawdźWynikWewnętrzny() throws IOException {

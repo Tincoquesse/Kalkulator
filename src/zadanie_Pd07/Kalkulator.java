@@ -56,7 +56,6 @@ public class Kalkulator {
 
         Scanner scanner = new Scanner(System.in);
         Kalkulator kalkulatorRun = new Kalkulator("dane");
-
         System.out.println("Witaj w aplikacji Kalkulator!");
         boolean run = true;
 
