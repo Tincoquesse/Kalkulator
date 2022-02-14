@@ -17,18 +17,18 @@ public class Kalkulator {
     void dodawanie(String input){
 
         String[] składniki = input.split("\\+");
-        float pierwszy = Float.parseFloat(składniki[0]);
-        float drugi = Float.parseFloat(składniki[1]);
-        float sum = pierwszy + drugi;
+        double pierwszy = Double.parseDouble(składniki[0]);
+        double drugi = Double.parseDouble(składniki[1]);
+        double sum = pierwszy + drugi;
         System.out.println(sum);
         printWriter.printf("%s=%s\n", input, sum);
 
     }
     void odejmownie(String input){
         String[] składniki = input.split("-");
-        float pierwszy = Float.parseFloat(składniki[0]);
-        float drugi = Float.parseFloat(składniki[1]);
-        float sum = pierwszy - drugi;
+        double pierwszy = Double.parseDouble(składniki[0]);
+        double drugi = Double.parseDouble(składniki[1]);
+        double sum = pierwszy - drugi;
         System.out.println(sum);
         printWriter.printf("%s=%s\n", input,sum);
 
@@ -36,17 +36,17 @@ public class Kalkulator {
     }
     void mnożenie(String input){
         String[] składniki = input.split("\\*");
-        float pierwszy = Float.parseFloat(składniki[0]);
-        float drugi = Float.parseFloat(składniki[1]);
-        float sum = pierwszy * drugi;
+        double pierwszy = Double.parseDouble(składniki[0]);
+        double drugi = Double.parseDouble(składniki[1]);
+        double sum = pierwszy * drugi;
         System.out.println(sum);
         printWriter.printf("%s=%s\n", input,sum);
     }
     void dzielenie(String input){
         String[] składniki = input.split("/");
-        float pierwszy = Float.parseFloat(składniki[0]);
-        float drugi = Float.parseFloat(składniki[1]);
-        float sum = pierwszy / drugi;
+        double pierwszy = Double.parseDouble(składniki[0]);
+        double drugi = Double.parseDouble(składniki[1]);
+        double sum = (pierwszy / drugi);
         System.out.println(sum);
         printWriter.printf("%s=%s\n", input,sum);
     }
@@ -59,10 +59,11 @@ public class Kalkulator {
 
         System.out.println("Witaj w aplikacji Kalkulator!");
         boolean run = true;
+
         while (run) {
             System.out.println("Wpisz działanie -\n" +
                     "jeśli chcesz zakończyć napisz 'end'. ");
-            String firstLineInput = scanner.nextLine();
+            String firstLineInput = scanner.nextLine();//pierwsza linia
             String firstLineInputPrime  = firstLineInput.replace(',','.');//obsługa przecinka
             String firstLine = firstLineInputPrime.replace(" ", "");//obsługa spacji
 
@@ -77,7 +78,7 @@ public class Kalkulator {
             else if (firstLine.contains("end")) {
                 kalkulatorRun.printWriter.close();
                 Test test = new Test();
-                test.sprawdźWyniki();
+                test.sprawdźWynikWewnętrzny();
                 run = false;
             }else
                 System.out.println("Wpisałeś złą składnię");

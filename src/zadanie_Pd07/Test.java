@@ -11,19 +11,43 @@ import java.io.IOException;
 public class Test {
 
      void sprawdźWyniki() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\FOM\\IdeaProjects\\Zadania_13.02\\dane"));
+        BufferedReader reader = new BufferedReader(new FileReader("dane"));
         String line = reader.readLine();
 
         while (line != null) {
+            boolean ok = false;
             System.out.println(line);
             String[] split = line.split("=");
 
             Expression expression = new ExpressionBuilder(split[0]).build();
-            float działanie = (float) expression.evaluate();
-            float wynik = Float.parseFloat(split[1]);
+            double działanie = expression.evaluate();
+            double wynik = Double.parseDouble(split[1]);
 
             if (działanie != wynik) {
-                System.out.println("Błąd programu kompilacji");
+                System.out.println("Błąd w ostatnim działaniu");
+                ok = true;
+                break;
+            }
+            line = reader.readLine();
+            if (!ok)
+                System.out.println("Wyniki poprawne");
+        }
+
+    }
+
+    void sprawdźWynikWewnętrzny() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("dane"));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] split = line.split("=");
+
+            Expression expression = new ExpressionBuilder(split[0]).build();
+            double działanie = expression.evaluate();
+            double wynik = Double.parseDouble(split[1]);
+
+            if (działanie != wynik) {
+                System.out.println("Błąd w ostatnim działaniu: "+ line);
                 break;
             }
             line = reader.readLine();
@@ -33,6 +57,6 @@ public class Test {
 
     public static void main(String[] args) throws IOException, ScriptException {
         Test test = new Test();
-         test.sprawdźWyniki();
+        test.sprawdźWyniki();
     }
 }
