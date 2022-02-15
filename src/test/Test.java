@@ -1,4 +1,4 @@
-package zadanie_Pd07;
+package test;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -10,32 +10,32 @@ import java.io.IOException;
 
 public class Test {
 
-     void sprawdźWyniki() throws IOException {
+     private void checkResults() throws IOException {
          BufferedReader reader = new BufferedReader(new FileReader("dane"));
          String line = reader.readLine();
 
-         boolean ok = true;
+         boolean resultOK = true;
 
          while (line != null) {
             System.out.println(line);
             String[] split = line.split("=");
 
             Expression expression = new ExpressionBuilder(split[0]).build();
-            double działanie = expression.evaluate();
-            double wynik = Double.parseDouble(split[1]);
+            double action = expression.evaluate();
+            double result = Double.parseDouble(split[1]);
 
-            if (działanie != wynik) {
-                System.out.println("Błąd w ostatnim działaniu");
-                ok = false;
+            if (action != result) {
+                System.out.println("Błąd w ostatnim działaniu!");
+                resultOK = false;
                 break;
             }
             line = reader.readLine();
         }
-         if (ok)
-             System.out.println("Wyniki poprawne");
+         if (resultOK)
+             System.out.println("Wyniki są poprawne!");
     }
 
-    void sprawdźWynikWewnętrzny() throws IOException {
+    public void checkInternalResults() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("dane"));
         String line = reader.readLine();
 
@@ -43,10 +43,10 @@ public class Test {
             String[] split = line.split("=");
 
             Expression expression = new ExpressionBuilder(split[0]).build();
-            double działanie = expression.evaluate();
-            double wynik = Double.parseDouble(split[1]);
+            double action = expression.evaluate();
+            double result = Double.parseDouble(split[1]);
 
-            if (działanie != wynik) {
+            if (action != result) {
                 System.out.println("Błąd w ostatnim działaniu: "+ line);
                 break;
             }
@@ -56,6 +56,6 @@ public class Test {
 
     public static void main(String[] args) throws IOException, ScriptException {
         Test test = new Test();
-        test.sprawdźWyniki();
+        test.checkResults();
     }
 }
