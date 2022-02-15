@@ -52,7 +52,6 @@ public class Test {
             }
             line = reader.readLine();
         }
-
     }
 
     public static void main(String[] args) throws IOException, ScriptException {
