@@ -2,7 +2,6 @@ package test;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
-
 import javax.script.ScriptException;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,7 +9,7 @@ import java.io.IOException;
 
 public class Test {
 
-     private void checkResults() throws IOException {
+    private void checkResults() throws IOException {
          BufferedReader reader = new BufferedReader(new FileReader("dane"));
          String line = reader.readLine();
 
@@ -31,7 +30,7 @@ public class Test {
             }
             line = reader.readLine();
         }
-         if (resultOK)
+        if (resultOK)
              System.out.println("Wyniki są poprawne!");
     }
 
