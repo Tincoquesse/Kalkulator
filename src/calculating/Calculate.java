@@ -1,11 +1,10 @@
 package calculating;
 import menageData.FileMenager;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 public class Calculate {
-FileMenager fileMenager;
+
 
     public Calculate() throws IOException {
     }
@@ -25,7 +24,6 @@ FileMenager fileMenager;
         double sum = first - second;
         System.out.println(sum);
         fileMenager.saveToFile(input, sum);
-
 
     }
     public void multiplication(String input, FileMenager fileMenager){
