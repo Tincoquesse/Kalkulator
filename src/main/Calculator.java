@@ -24,7 +24,13 @@ public class Calculator {
 
 
 
-            if(firstLine.matches(".*[a-zA-Z]+.*")){
+            if (firstLine.contains("end")) {
+                fileMenager.closeWriting();  //zamykamy zapis do pliku 'dane'
+                Test test = new Test(); //tworzymy obiekt testowy
+                test.checkInternalResults();  //uruchamiamy metodę testu wewnętrznego
+                run = false;
+            }
+             else if(firstLine.matches(".*[a-zA-Z]+.*")){
                 System.out.println("Staraj się podać działanie bez liter");
             }
             else if (firstLine.contains("+")) {
@@ -38,13 +44,6 @@ public class Calculator {
             }
             else if (firstLine.contains("/")){
                 calculate.division(firstLine, fileMenager);
-            }
-
-            else if (firstLine.contains("end")) {
-                fileMenager.closeWriting();  //zamykamy zapis do pliku 'dane'
-                Test test = new Test(); //tworzymy obiekt testowy
-                test.checkInternalResults();  //uruchamiamy metodę testu wewnętrznego
-                run = false;
             }
             else
                 System.out.println("Wpisałeś złą składnię");
