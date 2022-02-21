@@ -1,4 +1,5 @@
 package main;
+import GUI.*;
 
 import calculating.Calculate;
 import menageData.FileMenager;
@@ -17,11 +18,11 @@ public class Calculator {
         System.out.println("Witaj w aplikacji Kalkulator!");
         boolean run = true;
         while (run) {
+//            GUI.Window.main();
             System.out.println("Wpisz działanie - jeśli chcesz zakończyć napisz 'end'. ");
             String firstLineInput = scanner.nextLine();
             String firstLineInputPrime  = firstLineInput.replace(',','.');  //obsługa przecinka
             String firstLine = firstLineInputPrime.replace(" ", "");    //obsługa spacji
-
 
 
             if (firstLine.contains("end")) {
