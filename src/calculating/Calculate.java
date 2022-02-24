@@ -1,46 +1,39 @@
 package calculating;
 import menageData.FileMenager;
-import java.io.IOException;
-
 
 public class Calculate {
 
-
-    public Calculate() throws IOException {
-    }
-
-    public void addition(String input, FileMenager fileMenager){
+    public String addition(String input, FileMenager fileMenager){
         String[] splittedInput = input.split("\\+");
         double first = Double.parseDouble(splittedInput[0]);
         double second = Double.parseDouble(splittedInput[1]);
         double sum = first + second;
-        System.out.println(sum);
         fileMenager.saveToFile(input, sum);
+        return String.valueOf(sum);
     }
-    public void subtraction(String input, FileMenager fileMenager){
+    public String subtraction(String input, FileMenager fileMenager){
         String[] splittedInput = input.split("-");
         double first = Double.parseDouble(splittedInput[0]);
         double second = Double.parseDouble(splittedInput[1]);
         double sum = first - second;
-        System.out.println(sum);
         fileMenager.saveToFile(input, sum);
-
+        return String.valueOf(sum);
     }
-    public void multiplication(String input, FileMenager fileMenager){
+    public String multiplication(String input, FileMenager fileMenager){
         String[] splittedInput = input.split("\\*");
         double first = Double.parseDouble(splittedInput[0]);
         double second = Double.parseDouble(splittedInput[1]);
         double sum = first * second;
-        System.out.println(sum);
         fileMenager.saveToFile(input, sum);
+        return String.valueOf(sum);
     }
-    public void division(String input, FileMenager fileMenager){
+    public String division(String input, FileMenager fileMenager){
         String[] składniki = input.split("/");
         double pierwszy = Double.parseDouble(składniki[0]);
         double drugi = Double.parseDouble(składniki[1]);
         double sum = pierwszy / drugi;
-        System.out.println(sum);
         fileMenager.saveToFile(input, sum);
+        return  String.valueOf(sum);
     }
 
 
