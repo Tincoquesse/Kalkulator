@@ -1,5 +1,4 @@
-package main;
-import GUI.*;
+package calculator_logic;
 
 import calculating.Calculate;
 import menageData.FileMenager;

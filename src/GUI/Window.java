@@ -1,7 +1,6 @@
 package GUI;
 
-import main.Calculator;
-
+import calculator_logic.Calculator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,150 +8,176 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Window extends JFrame implements ActionListener {
-    JButton bZero, bJeden, bDwa, bTrzy, bCztery, bPiec, bSzesc, bSiedem, bOsiem, bDziewiec
-            , bPlus, bMinus, bMnoz, bDziel, bPrzecinek, bWynik;
-    JLabel lWyswietlPasekObliczen;
 
-    private String pasekDziałanTresc = "";
+    private static Color lightblue = new Color(150,200,255);
+    private static String stringToScreen = "";
+    JButton bClear, bZero, bOne, bTwo, bThree, bFour, bFive,
+            bSix, bSeven, bEight, bNine, bPlus, bMinus,
+            bMultiply, bDivided, bComma, bEqual;
+    JLabel lToScreen;
 
     public Window() throws HeadlessException {
         setSize(255,320);
         setTitle("Kalkulator");
         setLayout(null);
+        setResizable(false);
 
-        bZero = new JButton("0");
+        Icon iClear = new ImageIcon("src/Icons/alphabetC.png");
+        bClear = new  JButton(iClear);
+        bClear.setBounds(200, 0, 40, 40);
+        add(bClear);
+        bClear.addActionListener(this);
+
+        Icon iZero = new ImageIcon("src/Icons/zero.png");
+        bZero = new JButton(iZero);
         bZero.setBounds(0, 220, 60, 60);
         add(bZero);
         bZero.addActionListener(this);
 
-        bPrzecinek = new JButton(".");
-        bPrzecinek.setBounds(60, 220, 60, 60);
-        add(bPrzecinek);
-        bPrzecinek.addActionListener(this);
+        Icon iComma = new ImageIcon("src/Icons/comma.png");
+        bComma = new JButton(iComma);
+        bComma.setBounds(60, 220, 60, 60);
+        add(bComma);
+        bComma.addActionListener(this);
 
-        bWynik = new JButton("=");
-        bWynik.setBounds(120, 220, 60, 60);
-        bWynik.setBackground(Color.CYAN);
-        add(bWynik);
-        bWynik.addActionListener(this);
+        Icon iEqual = new ImageIcon("src/Icons/equal.png");
+        bEqual = new JButton(iEqual);
+        bEqual.setBounds(120, 220, 60, 60);
+        add(bEqual);
+        bEqual.addActionListener(this);
 
-        bPlus = new JButton("+");
+        Icon iPlus = new ImageIcon("src/Icons/plus.png");
+        bPlus = new JButton(iPlus);
         bPlus.setBounds(180, 220, 60, 60);
         add(bPlus);
         bPlus.addActionListener(this);
 
-        bMinus = new JButton("-");
+        Icon iMinus = new ImageIcon("src/Icons/minus.png");
+        bMinus = new JButton(iMinus);
         bMinus.setBounds(180, 160, 60, 60);
         add(bMinus);
         bMinus.addActionListener(this);
 
-        bJeden = new JButton("1");
-        bJeden.setBounds(0, 160, 60, 60);
-        add(bJeden);
-        bJeden.addActionListener(this);
+        Icon iOne = new ImageIcon("src/Icons/number1.png");
+        bOne = new JButton(iOne);
+        bOne.setBounds(0, 160, 60, 60);
+        add(bOne);
+        bOne.addActionListener(this);
 
-        bDwa = new JButton("2");
-        bDwa.setBounds(60, 160, 60, 60);
-        add(bDwa);
-        bDwa.addActionListener(this);
+        Icon iTwo = new ImageIcon("src/Icons/two.png");
+        bTwo = new JButton(iTwo);
+        bTwo.setBounds(60, 160, 60, 60);
+        add(bTwo);
+        bTwo.addActionListener(this);
 
-        bTrzy = new JButton("3");
-        bTrzy.setBounds(120,160,60,60);
-        add(bTrzy);
-        bTrzy.addActionListener(this);
+        Icon iThree = new ImageIcon("src/Icons/three.png");
+        bThree = new JButton(iThree);
+        bThree.setBounds(120,160,60,60);
+        add(bThree);
+        bThree.addActionListener(this);
 
-        bCztery = new JButton("4");
-        bCztery.setBounds(0, 100, 60, 60);
-        add(bCztery);
-        bCztery.addActionListener(this);
+        Icon iFour = new ImageIcon("src/Icons/four.png");
+        bFour = new JButton(iFour);
+        bFour.setBounds(0, 100, 60, 60);
+        add(bFour);
+        bFour.addActionListener(this);
 
-        bPiec = new JButton("5");
-        bPiec.setBounds(60,100,60,60);
-        add(bPiec);
-        bPiec.addActionListener(this);
+        Icon iFive = new ImageIcon("src/Icons/five.png");
+        bFive = new JButton(iFive);
+        bFive.setBounds(60,100,60,60);
+        add(bFive);
+        bFive.addActionListener(this);
 
-        bSzesc = new JButton("6");
-        bSzesc.setBounds(120, 100, 60, 60);
-        add(bSzesc);
-        bSzesc.addActionListener(this);
+        Icon iSix = new ImageIcon("src/Icons/six.png");
+        bSix = new JButton(iSix);
+        bSix.setBounds(120, 100, 60, 60);
+        add(bSix);
+        bSix.addActionListener(this);
 
-        bMnoz = new JButton("*");
-        bMnoz.setBounds(180, 100, 60, 60);
-        add(bMnoz);
-        bMnoz.addActionListener(this);
+        Icon iMultiply = new ImageIcon("src/Icons/multiply.png");
+        bMultiply = new JButton(iMultiply);
+        bMultiply.setBounds(180, 100, 60, 60);
+        add(bMultiply);
+        bMultiply.addActionListener(this);
 
-        bSiedem =new JButton("7");
-        bSiedem.setBounds(0, 40, 60, 60);
-        add(bSiedem);
-        bSiedem.addActionListener(this);
+        Icon iSeven = new ImageIcon("src/Icons/seven.png");
+        bSeven =new JButton(iSeven);
+        bSeven.setBounds(0, 40, 60, 60);
+        add(bSeven);
+        bSeven.addActionListener(this);
 
-        bOsiem = new JButton("8");
-        bOsiem.setBounds(60, 40, 60, 60);
-        add(bOsiem);
-        bOsiem.addActionListener(this);
+        Icon iEight = new ImageIcon("src/Icons/eight.png");
+        bEight = new JButton(iEight);
+        bEight.setBounds(60, 40, 60, 60);
+        add(bEight);
+        bEight.addActionListener(this);
 
-        bDziewiec = new JButton("9");
-        bDziewiec.setBounds(120, 40, 60, 60);
-        add(bDziewiec);
-        bDziewiec.addActionListener(this);
+        Icon iNine = new ImageIcon("src/Icons/nine.png");
+        bNine = new JButton(iNine);
+        bNine.setBounds(120, 40, 60, 60);
+        add(bNine);
+        bNine.addActionListener(this);
 
-        bDziel = new JButton("/");
-        bDziel.setBounds(180, 40, 60, 60);
-        add(bDziel);
-        bDziel.addActionListener(this);
+        Icon iDivided = new ImageIcon("src/Icons/divided.png");
+        bDivided = new JButton(iDivided);
+        bDivided.setBounds(180, 40, 60, 60);
+        add(bDivided);
+        bDivided.addActionListener(this);
 
-        lWyswietlPasekObliczen = new JLabel("0", SwingConstants.RIGHT);
-        lWyswietlPasekObliczen.setBounds(0, 0, 200, 40);
-        lWyswietlPasekObliczen.setAutoscrolls(true);
-        lWyswietlPasekObliczen.setFont(new Font("Serif", Font.TYPE1_FONT, 20));
-        add(lWyswietlPasekObliczen);
+        lToScreen = new JLabel("0", SwingConstants.RIGHT);
+        lToScreen.setBounds(0, 0, 200, 40);
+        lToScreen.setAutoscrolls(true);
+        lToScreen.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
+        lToScreen.setOpaque(true);
+        lToScreen.setBackground(lightblue);
+        lToScreen.setFont(new Font("Serif", Font.BOLD, 20));
+        add(lToScreen);
     }
-
     public static void main(String Args[] ) {
 
-        Window okno = new Window();
-        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        okno.setVisible(true);
+        Window window = new Window();
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object źródło = e.getSource();
 
-        if (źródło == bJeden) {
+        if (źródło == bOne) {
             dodajDoPaska("1");
         }
-        else if (źródło == bDwa){
+        else if (źródło == bTwo){
             dodajDoPaska("2");
         }
-        else if (źródło == bTrzy) {
+        else if (źródło == bThree) {
             dodajDoPaska("3");
         }
-        else if (źródło == bCztery){
+        else if (źródło == bFour){
             dodajDoPaska("4");
         }
-        else if (źródło == bPiec) {
+        else if (źródło == bFive) {
             dodajDoPaska("5");
         }
-        else if (źródło == bSzesc){
+        else if (źródło == bSix){
             dodajDoPaska("6");
         }
-        else if (źródło == bSiedem){
+        else if (źródło == bSeven){
             dodajDoPaska("7");
         }
-        else if (źródło == bOsiem){
+        else if (źródło == bEight){
             dodajDoPaska("8");
         }
-        else if (źródło == bDziewiec){
+        else if (źródło == bNine){
             dodajDoPaska("9");
         }
         else if (źródło == bZero){
             dodajDoPaska("0");
         }
-        else if (źródło == bDziel){
+        else if (źródło == bDivided){
             dodajDoPaska("/");
         }
-        else if (źródło == bPrzecinek){
+        else if (źródło == bComma){
             dodajDoPaska(".");
         }
         else if (źródło == bPlus){
@@ -161,23 +186,26 @@ public class Window extends JFrame implements ActionListener {
         else if (źródło == bMinus){
             dodajDoPaska("-");
         }
-        else if (źródło == bMnoz){
+        else if (źródło == bMultiply){
             dodajDoPaska("*");
         }
-        else if (źródło == bWynik){
+        else if (źródło==bClear){
+            stringToScreen = "0";
+            lToScreen.setText(stringToScreen);
+        }
+        else if (źródło == bEqual){
             try {
                 Calculator oblicz = new Calculator();
-                lWyswietlPasekObliczen.setText(oblicz.calculateToScreen(pasekDziałanTresc));
-
+                String sum = oblicz.calculateToScreen(stringToScreen);
+                lToScreen.setText(sum);
+                stringToScreen = sum;
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            pasekDziałanTresc = "";
-
         }
     }
     public void dodajDoPaska(String symbol){
-        pasekDziałanTresc = pasekDziałanTresc.concat(symbol);
-        lWyswietlPasekObliczen.setText(pasekDziałanTresc);
+            stringToScreen = stringToScreen.concat(symbol);
+            lToScreen.setText(stringToScreen);
     }
 }
