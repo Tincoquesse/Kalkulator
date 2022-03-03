@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Test {
 
     private void checkResults() throws IOException {
-         BufferedReader reader = new BufferedReader(new FileReader("dane"));
+         BufferedReader reader = new BufferedReader(new FileReader("calculationHistory.txt"));
          String line = reader.readLine();
 
          boolean resultOK = true;
@@ -36,7 +36,7 @@ public class Test {
     }
 
     public void checkInternalResults() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("dane"));
+        BufferedReader reader = new BufferedReader(new FileReader("calculationHistory.txt"));
         String line = reader.readLine();
 
         while (line != null) {

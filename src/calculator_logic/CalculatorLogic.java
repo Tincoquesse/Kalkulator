@@ -4,14 +4,13 @@ import calculating.Calculate;
 import menageData.FileMenager;
 import java.io.*;
 
-public class Calculator{
+public class CalculatorLogic {
 
-    public String calculateToScreen(String pasekDziałańTreść) throws IOException {
+    public String calculateToScreen(String stringToScreen, FileMenager fileMenager) throws IOException {
 
         Calculate calculate = new Calculate();  //obiekt klasy Calculate do urochomienia obliczeń
-        FileMenager fileMenager = new FileMenager("dane");
 
-            String firstLine = pasekDziałańTreść;
+            String firstLine = stringToScreen;
 
             String result = null;
             if (firstLine.contains("+")) {

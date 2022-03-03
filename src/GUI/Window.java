@@ -1,6 +1,8 @@
 package GUI;
 
-import calculator_logic.Calculator;
+import calculator_logic.CalculatorLogic;
+import menageData.FileMenager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,14 +11,16 @@ import java.io.IOException;
 
 public class Window extends JFrame implements ActionListener {
 
-    private static Color lightblue = new Color(150,200,255);
+    FileMenager fileMenager;
+    private static Color LIGHT_BLUE = new Color(150,200,255);
     private static String stringToScreen = "";
     JButton bClear, bZero, bOne, bTwo, bThree, bFour, bFive,
             bSix, bSeven, bEight, bNine, bPlus, bMinus,
             bMultiply, bDivided, bComma, bEqual;
     JLabel lToScreen;
 
-    public Window() throws HeadlessException {
+    public Window(FileMenager fileMenager) throws HeadlessException, IOException {
+        this.fileMenager = fileMenager;
         setSize(255,320);
         setTitle("Kalkulator");
         setLayout(null);
@@ -129,83 +133,86 @@ public class Window extends JFrame implements ActionListener {
         lToScreen.setAutoscrolls(true);
         lToScreen.setBorder(BorderFactory.createLineBorder(Color.black, 2, true));
         lToScreen.setOpaque(true);
-        lToScreen.setBackground(lightblue);
-        lToScreen.setFont(new Font("Serif", Font.BOLD, 20));
+        lToScreen.setBackground(LIGHT_BLUE);
+        lToScreen.setFont(new Font("Serif", Font.BOLD, 25));
         add(lToScreen);
-    }
-    public static void main(String Args[] ) {
-
-        Window window = new Window();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object źródło = e.getSource();
+        Object source = e.getSource();
 
-        if (źródło == bOne) {
-            dodajDoPaska("1");
+        if (source == bOne) {
+            addToLabel("1");
         }
-        else if (źródło == bTwo){
-            dodajDoPaska("2");
+        else if (source == bTwo){
+            addToLabel("2");
         }
-        else if (źródło == bThree) {
-            dodajDoPaska("3");
+        else if (source == bThree) {
+            addToLabel("3");
         }
-        else if (źródło == bFour){
-            dodajDoPaska("4");
+        else if (source == bFour){
+            addToLabel("4");
         }
-        else if (źródło == bFive) {
-            dodajDoPaska("5");
+        else if (source == bFive) {
+            addToLabel("5");
         }
-        else if (źródło == bSix){
-            dodajDoPaska("6");
+        else if (source == bSix){
+            addToLabel("6");
         }
-        else if (źródło == bSeven){
-            dodajDoPaska("7");
+        else if (source == bSeven){
+            addToLabel("7");
         }
-        else if (źródło == bEight){
-            dodajDoPaska("8");
+        else if (source == bEight){
+            addToLabel("8");
         }
-        else if (źródło == bNine){
-            dodajDoPaska("9");
+        else if (source == bNine){
+            addToLabel("9");
         }
-        else if (źródło == bZero){
-            dodajDoPaska("0");
+        else if (source == bZero){
+            addToLabel("0");
         }
-        else if (źródło == bDivided){
-            dodajDoPaska("/");
+        else if (source == bDivided){
+            addToLabel("/");
         }
-        else if (źródło == bComma){
-            dodajDoPaska(".");
+        else if (source == bComma){
+            addToLabel(".");
         }
-        else if (źródło == bPlus){
-            dodajDoPaska("+");
+        else if (source == bPlus){
+            addToLabel("+");
         }
-        else if (źródło == bMinus){
-            dodajDoPaska("-");
+        else if (source == bMinus){
+            addToLabel("-");
         }
-        else if (źródło == bMultiply){
-            dodajDoPaska("*");
+        else if (source == bMultiply){
+            addToLabel("*");
         }
-        else if (źródło==bClear){
-            stringToScreen = "0";
-            lToScreen.setText(stringToScreen);
+        else if (source==bClear){
+            stringToScreen = "";
+            lToScreen.setText(stringToScreen)
+            ;
         }
-        else if (źródło == bEqual){
+        else if (source == bEqual){
             try {
-                Calculator oblicz = new Calculator();
-                String sum = oblicz.calculateToScreen(stringToScreen);
-                lToScreen.setText(sum);
-                stringToScreen = sum;
+                CalculatorLogic calculatorLogic = new CalculatorLogic();
+                String sum = calculatorLogic.calculateToScreen(stringToScreen, fileMenager);
+                if (sum.length()>=16) {
+                    String sumToScreen = sum.substring(0, 15);
+                    lToScreen.setText(sumToScreen);
+                    stringToScreen = sumToScreen;
+                }
+                else {
+                    lToScreen.setText(sum);
+                    stringToScreen = sum;
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }
-    public void dodajDoPaska(String symbol){
+    public void addToLabel(String symbol){
             stringToScreen = stringToScreen.concat(symbol);
             lToScreen.setText(stringToScreen);
     }
+
 }
